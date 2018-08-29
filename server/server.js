@@ -15,14 +15,11 @@ app.use(express.static(publicPath))
 
 io.on('connection', (socket) => {
   console.log('New user connected');
-});
 
-io.on('disconnection', ()=>{
-  console.log('User was disconnected (disconnection)');
-});
+  socket.on('disconnect', ()=> {
+    console.log('User was disconnected (disconnect)');
+  });
 
-io.on('disconnect', ()=>{
-  console.log('User was disconnected (disconnect)');
 });
 
 server.listen(port, () => {
