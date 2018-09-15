@@ -26,7 +26,7 @@ io.on('connection', (socket) => {
 
   socket.broadcast.emit('newMessage', generateMessage('Admin', 'New user joined'));
 
-  socket.on('createMessage', (msg) => {
+  socket.on('createMessage', (msg, ackCallback) => {
     console.log('createMessage received from client', msg);
 
     io.emit('newMessage', generateMessage(msg.from, msg.text));
@@ -36,6 +36,8 @@ io.on('connection', (socket) => {
     //   text: msg.text,
     //   createdAt: new Date().getTime()
     // });
+
+    ackCallback('This is from the server');
 
   });
 
